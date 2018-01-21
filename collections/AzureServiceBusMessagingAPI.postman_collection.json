@@ -1,0 +1,475 @@
+{
+	"info": {
+		"name": "Azure Service Bus Messaging API",
+		"_postman_id": "a64f4070-25ff-670e-0955-67614dae9d0a",
+		"description": "Send and receive messages using the [Service Bus Messaging API](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Queue",
+			"description": "",
+			"item": [
+				{
+					"name": "Send Message (Queue)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							},
+							{
+								"key": "BrokerProperties",
+								"value": "null",
+								"description": "JSON-encoded set of BrokeredMessage properties"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Hello World!"
+						},
+						"url": {
+							"raw": "{{namespaceUri}}/{{queueName}}/messages",
+							"host": [
+								"{{namespaceUri}}"
+							],
+							"path": [
+								"{{queueName}}",
+								"messages"
+							]
+						},
+						"description": "Sends a message to a Service Bus queue or topic.    \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
+					},
+					"response": []
+				},
+				{
+					"name": "Peek-Lock Message (Queue)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e2cffe52-d621-4747-af7e-265058a41b51",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							},
+							{
+								"key": "BrokerProperties",
+								"value": "null",
+								"description": "JSON-encoded set of BrokeredMessage properties"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{namespaceUri}}/{{queueName}}/messages/head",
+							"host": [
+								"{{namespaceUri}}"
+							],
+							"path": [
+								"{{queueName}}",
+								"messages",
+								"head"
+							]
+						},
+						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
+					},
+					"response": []
+				},
+				{
+					"name": "Receive and Delete Message (Queue)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "cc263b41-b4b9-46f8-bb96-ea189ec42bc4",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							},
+							{
+								"key": "BrokerProperties",
+								"value": "null",
+								"description": "JSON-encoded set of BrokeredMessage properties"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{namespaceUri}}/{{queueName}}/messages/head",
+							"host": [
+								"{{namespaceUri}}"
+							],
+							"path": [
+								"{{queueName}}",
+								"messages",
+								"head"
+							]
+						},
+						"description": "This operation receives a message from a queue or subscription, and removes the message from that queue or subscription in one atomic operation.    \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/receive-and-delete-message-destructive-read)"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9ca824e3-6de2-4a28-9d5b-054b015f641a",
+						"type": "text/javascript",
+						"exec": [
+							"const queueName = \"\";",
+							"",
+							"pm.variables.set(\"queueName\", queueName);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f494fd7-7eef-4dc1-8c22-3e23243eb703",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Subscription",
+			"description": "",
+			"item": [
+				{
+					"name": "Send Message (Subscription)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							},
+							{
+								"key": "BrokerProperties",
+								"value": "null",
+								"description": "JSON-encoded set of BrokeredMessage properties"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Hello World!"
+						},
+						"url": {
+							"raw": "{{namespaceUri}}/{{topicName}}/messages",
+							"host": [
+								"{{namespaceUri}}"
+							],
+							"path": [
+								"{{topicName}}",
+								"messages"
+							]
+						},
+						"description": "Sends a message to a Service Bus queue or topic.    \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
+					},
+					"response": []
+				},
+				{
+					"name": "Peek-Lock Message (Subscription)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e2cffe52-d621-4747-af7e-265058a41b51",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							},
+							{
+								"key": "BrokerProperties",
+								"value": "null",
+								"description": "JSON-encoded set of BrokeredMessage properties"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{namespaceUri}}/{{topicName}}/subscriptions/{{subscriptionName}}/messages/head",
+							"host": [
+								"{{namespaceUri}}"
+							],
+							"path": [
+								"{{topicName}}",
+								"subscriptions",
+								"{{subscriptionName}}",
+								"messages",
+								"head"
+							]
+						},
+						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
+					},
+					"response": []
+				},
+				{
+					"name": "Receive and Delete Message (Subscription)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e2cffe52-d621-4747-af7e-265058a41b51",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							},
+							{
+								"key": "BrokerProperties",
+								"value": "null",
+								"description": "JSON-encoded set of BrokeredMessage properties"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{namespaceUri}}/{{topicName}}/subscriptions/{{subscriptionName}}/messages/head",
+							"host": [
+								"{{namespaceUri}}"
+							],
+							"path": [
+								"{{topicName}}",
+								"subscriptions",
+								"{{subscriptionName}}",
+								"messages",
+								"head"
+							]
+						},
+						"description": "This operation receives a message from a queue or subscription, and removes the message from that queue or subscription in one atomic operation.    \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/receive-and-delete-message-destructive-read)"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "569650a0-41da-42bf-98e1-19ba1eadef06",
+						"type": "text/javascript",
+						"exec": [
+							"const topicName = \"\";",
+							"const subscriptionName = \"\";",
+							"",
+							"pm.variables.set(\"topicName\", topicName);",
+							"pm.variables.set(\"subscriptionName\", subscriptionName);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "045201f4-ea25-4879-96bc-eefa6635fb78",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cd54c413-85bc-46e8-9a93-b3f6abe9a93a",
+				"type": "text/javascript",
+				"exec": [
+					"const namespaceUri = pm.variables.get(\"namespaceUri\");",
+					"const sasKeyName = pm.variables.get(\"sasKeyName\");",
+					"const sasKey = pm.variables.get(\"sasKey\");",
+					"const sasToken = createSharedAccessToken(namespaceUri, sasKeyName, sasKey);",
+					"pm.variables.set(\"sasToken\", sasToken);",
+					"",
+					"/**",
+					" * Create a Azure Shared Access Signature (SAS) token valid for one minute",
+					" * Based on https://docs.microsoft.com/en-us/rest/api/eventhub/generate-sas-token but modified to use crypto-js for compatibility with Postman",
+					" * @param resourceUri - The full uri of the resource, e.g. https://<yournamespace>.servicebus.windows.net",
+					" * @param sasKeyName - The name of the Shared Access Signature key",
+					" * @param sasKey - The Shared Access Signature key",
+					" * @returns- A Shared Access Signature token",
+					" * {@link https://github.com/lfalck/AzureRestApiPostmanCollections GitHub}",
+					" * ",
+					" */",
+					"function createSharedAccessToken(resourceUri, sasKeyName, sasKey) {",
+					"    if (!resourceUri || !sasKeyName || !sasKey) {",
+					"        throw \"Missing required parameter\";",
+					"    }",
+					"    const encoded = encodeURIComponent(resourceUri);",
+					"    const now = new Date();",
+					"    const minute = 60;",
+					"    const ttl = Math.round(now.getTime() / 1000) + minute;",
+					"    const signature = encoded + '\\n' + ttl;",
+					"    const signatureUTF8 = signature.toString(CryptoJS.enc.Utf8);",
+					"    const hash = CryptoJS.HmacSHA256(signatureUTF8, sasKey).toString(CryptoJS.enc.Base64);",
+					"    return 'SharedAccessSignature sr=' + encoded + '&sig=' +",
+					"        encodeURIComponent(hash) + '&se=' + ttl + '&skn=' + sasKeyName;",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "927b8013-707c-4f34-bc73-054bbaa667b7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "99173576-61d2-41be-8647-62cf3a362a6e",
+			"key": "namespaceUri",
+			"value": "https://<yournamespace>.servicebus.windows.net",
+			"type": "text"
+		},
+		{
+			"id": "ef0d8da8-8185-4aab-8254-09ef95ba3926",
+			"key": "sasKeyName",
+			"value": "Enter here or as environment variable",
+			"type": "text"
+		},
+		{
+			"id": "4ac4c837-7c9c-47cd-b23d-c2713f3f04a0",
+			"key": "sasKey",
+			"value": "Enter here or as environment variable",
+			"type": "text"
+		},
+		{
+			"id": "4a7798bb-4854-482f-bebe-6480e5fdf8eb",
+			"key": "sasToken",
+			"value": "Automatically generated in collection pre request script",
+			"type": "text"
+		},
+		{
+			"id": "bcbca5e3-82df-400b-8e5b-ba3ab9f003f4",
+			"key": "queueName",
+			"value": "Need to be set in folder pre request script",
+			"type": "text"
+		},
+		{
+			"id": "5e87bf3a-d675-4a33-acaf-6c126c9a9d5d",
+			"key": "topicName",
+			"value": "Need to be set in folder pre request script",
+			"type": "text"
+		},
+		{
+			"id": "d114eca3-971a-48a9-90e8-e63cd9b21591",
+			"key": "subscriptionName",
+			"value": "Need to be set in folder pre request script",
+			"type": "text"
+		}
+	]
+}
