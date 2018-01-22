@@ -1,17 +1,16 @@
 {
 	"info": {
 		"name": "Azure Service Bus Messaging API",
-		"_postman_id": "a64f4070-25ff-670e-0955-67614dae9d0a",
-		"description": "Send and receive messages using the [Service Bus Messaging API](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)",
+		"_postman_id": "0f479502-4b20-b860-8d2e-e2dc60f2558d",
+		"description": "Send and receive messages using the Service Bus Messaging API [Documentation ](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Queue",
-			"description": "",
 			"item": [
 				{
-					"name": "Send Message (Queue)",
+					"name": "Send Message",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -56,12 +55,12 @@
 								"messages"
 							]
 						},
-						"description": "Sends a message to a Service Bus queue or topic.    \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
+						"description": "Sends a message to a Service Bus queue or topic.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
 					},
 					"response": []
 				},
 				{
-					"name": "Peek-Lock Message (Queue)",
+					"name": "Peek-Lock Message",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -107,12 +106,12 @@
 								"head"
 							]
 						},
-						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
+						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
 					},
 					"response": []
 				},
 				{
-					"name": "Receive and Delete Message (Queue)",
+					"name": "Receive and Delete Message",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -158,7 +157,7 @@
 								"head"
 							]
 						},
-						"description": "This operation receives a message from a queue or subscription, and removes the message from that queue or subscription in one atomic operation.    \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/receive-and-delete-message-destructive-read)"
+						"description": "This operation receives a message from a queue or subscription, and removes the message from that queue or subscription in one atomic operation.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/receive-and-delete-message-destructive-read)"
 					},
 					"response": []
 				}
@@ -171,7 +170,6 @@
 						"type": "text/javascript",
 						"exec": [
 							"const queueName = \"\";",
-							"",
 							"pm.variables.set(\"queueName\", queueName);"
 						]
 					}
@@ -190,10 +188,9 @@
 		},
 		{
 			"name": "Subscription",
-			"description": "",
 			"item": [
 				{
-					"name": "Send Message (Subscription)",
+					"name": "Send Message",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -243,7 +240,7 @@
 					"response": []
 				},
 				{
-					"name": "Peek-Lock Message (Subscription)",
+					"name": "Peek-Lock Message",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -296,7 +293,7 @@
 					"response": []
 				},
 				{
-					"name": "Receive and Delete Message (Subscription)",
+					"name": "Receive and Delete Message",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -387,11 +384,12 @@
 					"const namespaceUri = pm.variables.get(\"namespaceUri\");",
 					"const sasKeyName = pm.variables.get(\"sasKeyName\");",
 					"const sasKey = pm.variables.get(\"sasKey\");",
-					"const sasToken = createSharedAccessToken(namespaceUri, sasKeyName, sasKey);",
+					"const sasToken = createServiceBusSASToken(namespaceUri, sasKeyName, sasKey);",
+					"",
 					"pm.variables.set(\"sasToken\", sasToken);",
 					"",
 					"/**",
-					" * Create a Azure Shared Access Signature (SAS) token valid for one minute",
+					" * Create a Shared Access Signature (SAS) token valid for one minute for use with the Azure Service Bus REST API",
 					" * Based on https://docs.microsoft.com/en-us/rest/api/eventhub/generate-sas-token but modified to use crypto-js for compatibility with Postman",
 					" * @param resourceUri - The full uri of the resource, e.g. https://<yournamespace>.servicebus.windows.net",
 					" * @param sasKeyName - The name of the Shared Access Signature key",
@@ -400,7 +398,7 @@
 					" * {@link https://github.com/lfalck/AzureRestApiPostmanCollections GitHub}",
 					" * ",
 					" */",
-					"function createSharedAccessToken(resourceUri, sasKeyName, sasKey) {",
+					"function createServiceBusSASToken(resourceUri, sasKeyName, sasKey) {",
 					"    if (!resourceUri || !sasKeyName || !sasKey) {",
 					"        throw \"Missing required parameter\";",
 					"    }",
@@ -430,43 +428,43 @@
 	],
 	"variable": [
 		{
-			"id": "99173576-61d2-41be-8647-62cf3a362a6e",
+			"id": "5daf51eb-a5be-4def-9a81-be4ffdf35967",
 			"key": "namespaceUri",
 			"value": "https://<yournamespace>.servicebus.windows.net",
 			"type": "text"
 		},
 		{
-			"id": "ef0d8da8-8185-4aab-8254-09ef95ba3926",
+			"id": "9b9cebf3-8eea-40a4-887a-3beb60d2b98f",
 			"key": "sasKeyName",
-			"value": "Enter here or as environment variable",
+			"value": "Enter here or in an environment variable",
 			"type": "text"
 		},
 		{
-			"id": "4ac4c837-7c9c-47cd-b23d-c2713f3f04a0",
+			"id": "50d9d545-b047-4e84-946b-ae20a5aefb83",
 			"key": "sasKey",
-			"value": "Enter here or as environment variable",
+			"value": "Enter here or in an environment variable",
 			"type": "text"
 		},
 		{
-			"id": "4a7798bb-4854-482f-bebe-6480e5fdf8eb",
+			"id": "75eed579-cd82-4283-a4c4-608ed9cff7df",
 			"key": "sasToken",
 			"value": "Automatically generated in collection pre request script",
 			"type": "text"
 		},
 		{
-			"id": "bcbca5e3-82df-400b-8e5b-ba3ab9f003f4",
+			"id": "629a19c2-eb30-42e9-a9e1-932c6b3b8335",
 			"key": "queueName",
 			"value": "Need to be set in folder pre request script",
 			"type": "text"
 		},
 		{
-			"id": "5e87bf3a-d675-4a33-acaf-6c126c9a9d5d",
+			"id": "f9336f05-6161-4f64-ac4f-3fd50f2cca25",
 			"key": "topicName",
 			"value": "Need to be set in folder pre request script",
 			"type": "text"
 		},
 		{
-			"id": "d114eca3-971a-48a9-90e8-e63cd9b21591",
+			"id": "e48dc5e5-65f3-4234-8fed-bf78e130fc35",
 			"key": "subscriptionName",
 			"value": "Need to be set in folder pre request script",
 			"type": "text"
