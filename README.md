@@ -1,4 +1,4 @@
-# Azure Rest API Postman Collections
+# Azure REST API Postman Collections
 Postman collections to simplify interaction with the Azure REST APIs.
 ## Azure Service Bus Messaging API
 
