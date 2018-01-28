@@ -32,6 +32,6 @@ Send and receive messages using the [Queue Service API](https://docs.microsoft.c
 
 To get started, edit the collection variables **storageAccountName** and **storageSasKey**. Also set the variable **queueName** in the pre request script for the folder Queue. 
 
-[Full documentation here](https://documenter.getpostman.com/view/856851/collection/7TKhszb)
+[Full documentation here](https://documenter.getpostman.com/view/856851/collection/7TNgXDW)
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9f2b1af9fe8200b46c04)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d613ebfeb87fbc46cbdb)
