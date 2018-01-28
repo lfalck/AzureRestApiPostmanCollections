@@ -11,9 +11,20 @@ Send and receive messages using the [Service Bus Messaging API](https://docs.mic
 
 To get started, edit the collection variables **namespaceUri**, **sasKeyName** and **sasKey**. Also set the variables **queueName**, **topicName** and **subscriptionName** in the pre request script for the folders Queue and Subscription. 
 
-[Full documentation here](https://documenter.getpostman.com/view/856851/collection/7TKhsqr)
+[Full documentation here](https://documenter.getpostman.com/view/856851/collection/7TNgXDV)
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7126fabe94138fac5f17)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/903c59ca372a1a9e14f2)
+
+## Azure Event Hubs API
+
+Send events using the [Event Hubs API](https://docs.microsoft.com/en-us/rest/api/eventhub/event-hubs-runtime-rest)
+
+To get started, edit the collection variables **servicebusNamespace**, **sasKeyName** and **sasKey**. Also set the variables **eventHubPath** and **partitionId** (optional) in the pre request script for the folder Event Hub. 
+
+[Full documentation here](https://documenter.getpostman.com/view/856851/collection/7TNgXDT)
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/01f3903d2d19dafc00d4)
+
 
 ## Azure Storage API
 

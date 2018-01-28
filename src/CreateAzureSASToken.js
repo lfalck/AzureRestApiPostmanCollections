@@ -1,5 +1,5 @@
 /**
- * Create a Shared Access Signature (SAS) token valid for one minute for use with the Azure Service Bus REST API
+ * Create a Shared Access Signature (SAS) token valid for one minute for use with the Azure Service Bus or Event Hubs REST APIs
  * Based on https://docs.microsoft.com/en-us/rest/api/eventhub/generate-sas-token but modified to use crypto-js for compatibility with Postman
  * @param resourceUri - The full uri of the resource, e.g. https://<yournamespace>.servicebus.windows.net
  * @param sasKeyName - The name of the Shared Access Signature key
@@ -8,7 +8,7 @@
  * {@link https://github.com/lfalck/AzureRestApiPostmanCollections GitHub}
  * 
  */
-function createServiceBusSASToken(resourceUri, sasKeyName, sasKey) {
+function createSASToken(resourceUri, sasKeyName, sasKey) {
     if (!resourceUri || !sasKeyName || !sasKey) {
         throw "Missing required parameter";
     }

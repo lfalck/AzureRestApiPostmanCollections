@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "Azure Service Bus Messaging API",
-		"_postman_id": "0f479502-4b20-b860-8d2e-e2dc60f2558d",
+		"_postman_id": "2eaec1d9-9a31-ce38-98c6-10d2298f505d",
 		"description": "Send and receive messages using the Service Bus Messaging API [Documentation ](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -384,12 +384,12 @@
 					"const namespaceUri = pm.variables.get(\"namespaceUri\");",
 					"const sasKeyName = pm.variables.get(\"sasKeyName\");",
 					"const sasKey = pm.variables.get(\"sasKey\");",
-					"const sasToken = createServiceBusSASToken(namespaceUri, sasKeyName, sasKey);",
+					"const sasToken = createSASToken(namespaceUri, sasKeyName, sasKey);",
 					"",
 					"pm.variables.set(\"sasToken\", sasToken);",
 					"",
 					"/**",
-					" * Create a Shared Access Signature (SAS) token valid for one minute for use with the Azure Service Bus REST API",
+					" * Create a Shared Access Signature (SAS) token valid for one minute for use with the Azure Service Bus or Event Hubs REST APIs",
 					" * Based on https://docs.microsoft.com/en-us/rest/api/eventhub/generate-sas-token but modified to use crypto-js for compatibility with Postman",
 					" * @param resourceUri - The full uri of the resource, e.g. https://<yournamespace>.servicebus.windows.net",
 					" * @param sasKeyName - The name of the Shared Access Signature key",
@@ -398,7 +398,7 @@
 					" * {@link https://github.com/lfalck/AzureRestApiPostmanCollections GitHub}",
 					" * ",
 					" */",
-					"function createServiceBusSASToken(resourceUri, sasKeyName, sasKey) {",
+					"function createSASToken(resourceUri, sasKeyName, sasKey) {",
 					"    if (!resourceUri || !sasKeyName || !sasKey) {",
 					"        throw \"Missing required parameter\";",
 					"    }",

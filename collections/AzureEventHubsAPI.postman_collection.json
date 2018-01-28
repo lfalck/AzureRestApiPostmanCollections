@@ -1,0 +1,296 @@
+{
+	"info": {
+		"name": "Azure Event Hubs API",
+		"_postman_id": "618195e1-2f67-dfff-cda4-1d5d5b848208",
+		"description": "Send events using the Event Hubs API    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/event-hubs-runtime-rest)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Event Hub",
+			"description": "",
+			"item": [
+				{
+					"name": "Send Event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Hello World!"
+						},
+						"url": {
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/{{eventHubPath}}/messages?api-version={{api-version}}",
+							"protocol": "https",
+							"host": [
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
+							],
+							"path": [
+								"{{eventHubPath}}",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "api-version",
+									"value": "{{api-version}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "Sends a new event to an Event Hub.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/send-event)"
+					},
+					"response": []
+				},
+				{
+					"name": "Send partition event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Hello World!"
+						},
+						"url": {
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/{{eventHubPath}}/partitions/{{partitionId}}/messages",
+							"protocol": "https",
+							"host": [
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
+							],
+							"path": [
+								"{{eventHubPath}}",
+								"partitions",
+								"{{partitionId}}",
+								"messages"
+							]
+						},
+						"description": "Sends a new event to a specified partition in an Event Hub.\r\n\r\n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/send-partition-event)"
+					},
+					"response": []
+				},
+				{
+					"name": "Send batch events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.microsoft.servicebus.json",
+								"description": "Set to application/vnd.microsoft.servicebus.json for batch events"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\"Body\":\"Message1\"},\r\n\t{\"Body\":\"Message2\"},\r\n\t{\"Body\":\"Message3\"}\r\n]  \r\n"
+						},
+						"url": {
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/{{eventHubPath}}/messages",
+							"protocol": "https",
+							"host": [
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
+							],
+							"path": [
+								"{{eventHubPath}}",
+								"messages"
+							]
+						},
+						"description": "Sends a new batched message event to an Event Hub.\r\n\r\n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/send-batch-events)"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ad24c7bb-e8a1-444d-8556-c298943460aa",
+						"type": "text/javascript",
+						"exec": [
+							"const eventHubPath = \"\";",
+							"pm.variables.set(\"eventHubPath\", eventHubPath);",
+							"",
+							"const partitionId = 0;",
+							"pm.variables.set(\"partitionId\", partitionId);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b5dd321-fac8-472e-bd95-09150963254f",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cd54c413-85bc-46e8-9a93-b3f6abe9a93a",
+				"type": "text/javascript",
+				"exec": [
+					"const servicebusNamespace = pm.variables.get(\"servicebusNamespace\");",
+					"const namespaceUri = \"https://\"+servicebusNamespace+\".servicebus.windows.net\";",
+					"const sasKeyName = pm.variables.get(\"sasKeyName\");",
+					"const sasKey = pm.variables.get(\"sasKey\");",
+					"const sasToken = createSASToken(namespaceUri, sasKeyName, sasKey);",
+					"",
+					"pm.variables.set(\"sasToken\", sasToken);",
+					"",
+					"/**",
+					" * Create a Shared Access Signature (SAS) token valid for one minute for use with the Azure Service Bus or Event Hubs REST APIs",
+					" * Based on https://docs.microsoft.com/en-us/rest/api/eventhub/generate-sas-token but modified to use crypto-js for compatibility with Postman",
+					" * @param resourceUri - The full uri of the resource, e.g. https://<yournamespace>.servicebus.windows.net",
+					" * @param sasKeyName - The name of the Shared Access Signature key",
+					" * @param sasKey - The Shared Access Signature key",
+					" * @returns- A Shared Access Signature token",
+					" * {@link https://github.com/lfalck/AzureRestApiPostmanCollections GitHub}",
+					" * ",
+					" */",
+					"function createSASToken(resourceUri, sasKeyName, sasKey) {",
+					"    if (!resourceUri || !sasKeyName || !sasKey) {",
+					"        throw \"Missing required parameter\";",
+					"    }",
+					"    const encoded = encodeURIComponent(resourceUri);",
+					"    const now = new Date();",
+					"    const minute = 60;",
+					"    const ttl = Math.round(now.getTime() / 1000) + minute;",
+					"    const signature = encoded + '\\n' + ttl;",
+					"    const signatureUTF8 = signature.toString(CryptoJS.enc.Utf8);",
+					"    const hash = CryptoJS.HmacSHA256(signatureUTF8, sasKey).toString(CryptoJS.enc.Base64);",
+					"    return 'SharedAccessSignature sr=' + encoded + '&sig=' +",
+					"        encodeURIComponent(hash) + '&se=' + ttl + '&skn=' + sasKeyName;",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "927b8013-707c-4f34-bc73-054bbaa667b7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "fdc955c0-3368-4e59-aa82-c9eb471e6726",
+			"key": "servicebusNamespace",
+			"value": "Enter here or in an environment variable",
+			"type": "text"
+		},
+		{
+			"id": "26d0985f-3c64-4fc4-b843-31bb2cab889a",
+			"key": "sasKeyName",
+			"value": "Enter here or in an environment variable",
+			"type": "text"
+		},
+		{
+			"id": "2674a499-0013-4eeb-bdf0-d10c8649cf21",
+			"key": "sasKey",
+			"value": "Enter here or in an environment variable",
+			"type": "text"
+		},
+		{
+			"id": "5a5c05b2-354f-4a77-91cc-cf5632b6e940",
+			"key": "sasToken",
+			"value": "Automatically generated in collection pre request script",
+			"type": "text"
+		},
+		{
+			"id": "c3002f8e-a887-42d9-ad48-8459d9715474",
+			"key": "eventHubPath",
+			"value": "Need to be set in folder pre request script",
+			"type": "text"
+		},
+		{
+			"id": "0cc810be-258a-4082-ab6c-1841f61fc970",
+			"key": "api-version",
+			"value": "2014-01",
+			"type": "text"
+		},
+		{
+			"id": "5c442923-acf6-46dc-865d-14446fb5c565",
+			"key": "partitionId",
+			"value": "Can be set in folder pre request script if partitions are used",
+			"type": "text"
+		}
+	]
+}
