@@ -41,6 +41,7 @@ function createStorageSASTokenQueryString(accountName, sasKey) {
     const signedPermission = "rwdlacup"; //Read, Write, Delete, List, Add, Create, Update, Process
     const signedServices = "bfqt"; // Blob, File, Queue, Table
     const signedResourceTypes = "sco"; // Service, Container, Object
+    //Dates need to be in yyyy-dd-MMTHH:mm:ssZ format
     const signedStart = new Date(now.getTime() - minuteInMilliSeconds).toISOString().slice(0, 19) + "Z";
     const signedExpiry = new Date(now.getTime() + minuteInMilliSeconds).toISOString().slice(0, 19) + "Z";
     const signedIP = "";
@@ -63,6 +64,7 @@ function createStorageSASTokenQueryString(accountName, sasKey) {
     signature = signature.toString(CryptoJS.enc.Base64);
     signature = encodeURIComponent(signature);
 
+    //The full SAS token query string is added to the sv parameter to reduce the length of the request URI in Postman
     const uri =
         /*?sv=*/`${signedVersion}&` +
         `ss=${signedServices}&` +
