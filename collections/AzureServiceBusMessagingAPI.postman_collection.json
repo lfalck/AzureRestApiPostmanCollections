@@ -235,7 +235,7 @@
 								"messages"
 							]
 						},
-						"description": "Sends a message to a Service Bus queue or topic.    \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
+						"description": "Sends a message to a Service Bus queue or topic.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
 					},
 					"response": []
 				},
@@ -288,7 +288,7 @@
 								"head"
 							]
 						},
-						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
+						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
 					},
 					"response": []
 				},
@@ -341,7 +341,7 @@
 								"head"
 							]
 						},
-						"description": "This operation receives a message from a queue or subscription, and removes the message from that queue or subscription in one atomic operation.    \n[API Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/receive-and-delete-message-destructive-read)"
+						"description": "This operation receives a message from a queue or subscription, and removes the message from that queue or subscription in one atomic operation.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/receive-and-delete-message-destructive-read)"
 					},
 					"response": []
 				}
