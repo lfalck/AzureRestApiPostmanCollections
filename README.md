@@ -1,3 +1,4 @@
+[![license](https://img.shields.io/github/license/lfalck/AzureRestApiPostmanCollections.svg)]()
 # Azure REST API Postman Collections
 Postman collections to simplify interaction with the Azure REST APIs.
 
