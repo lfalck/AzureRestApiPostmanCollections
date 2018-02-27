@@ -12,9 +12,8 @@ Send and receive messages using the [Service Bus Messaging API](https://docs.mic
 
 To get started, edit the collection variables **namespaceUri**, **sasKeyName** and **sasKey**. Also set the variables **queueName**, **topicName** and **subscriptionName** in the pre request script for the folders Queue and Subscription. 
 
-[Full documentation here](https://documenter.getpostman.com/view/856851/collection/7TNgXDV)
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/903c59ca372a1a9e14f2)
+[Full documentation here]( https://documenter.getpostman.com/view/856851/collection/RVg3f8kD)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e76494a7358d49a18a65)
 
 ## Azure Event Hubs API
 
@@ -22,10 +21,8 @@ Send events using the [Event Hubs API](https://docs.microsoft.com/en-us/rest/api
 
 To get started, edit the collection variables **servicebusNamespace**, **sasKeyName** and **sasKey**. Also set the variables **eventHubPath** and **partitionId** (optional) in the pre request script for the folder Event Hub. 
 
-[Full documentation here](https://documenter.getpostman.com/view/856851/collection/7TNgXDT)
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/01f3903d2d19dafc00d4)
-
+[Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8k7)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ee13865ad00b3c55aebc)
 
 ## Azure Storage API
 
@@ -33,6 +30,6 @@ Send and receive messages using the [Queue Service API](https://docs.microsoft.c
 
 To get started, edit the collection variables **storageAccountName** and **storageSasKey**. Also set the variable **queueName** in the pre request script for the folder Queue. 
 
-[Full documentation here](https://documenter.getpostman.com/view/856851/collection/7TNgXDW)
+[Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8kE)
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d613ebfeb87fbc46cbdb)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b7c77fb099b35b7f1ed7)
