@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "Azure Storage API",
-		"_postman_id": "5c628866-71c2-032a-f034-f23f06d8e7df",
+		"_postman_id": "5b1a63a0-642d-4a8b-9e0f-df185b1cb443",
 		"description": "The REST APIs for the Microsoft Azure storage services offer programmatic access to the Blob, Queue, Table, and File services in Azure or in the development environment, via the storage emulator.\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/azure-storage-services-rest-api-reference)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -15,7 +15,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&numofmessages=1",
 							"host": [
@@ -49,7 +52,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&numofmessages=1&peekonly=true",
 							"host": [
@@ -124,7 +130,10 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&popreceipt=",
 							"host": [
@@ -158,7 +167,10 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}",
 							"host": [
@@ -217,31 +229,39 @@
 				"exec": [
 					"const storageSasKey = pm.variables.get(\"storageSasKey\");",
 					"const storageAccountName = pm.variables.get(\"storageAccountName\");",
-					"const storageSasTokenQueryString = createStorageSharedAccessTokenQueryString(storageAccountName, storageSasKey);",
+					"const storageSasTokenQueryString = createStorageSASTokenQueryString(storageAccountName, storageSasKey);",
 					"",
 					"pm.variables.set(\"storageSasTokenQueryString\", storageSasTokenQueryString);",
 					"",
 					"",
 					"/**",
-					" * Create a Azure Storage Shared Access Signature (SAS) token query string valid for one minute",
+					" * Create a Shared Access Signature (SAS) token query string valid for one minute for use with the Azure Storage REST API",
 					" * @param accountName - The storage account name",
 					" * @param sasKey - The Shared Access Signature key",
 					" * @returns- A Shared Access Signature token query string",
 					" * {@link https://github.com/lfalck/AzureRestApiPostmanCollections GitHub}",
 					" * ",
 					" */",
-					"function createStorageSharedAccessTokenQueryString(accountName, sasKey) {",
+					"function createStorageSASTokenQueryString(accountName, sasKey) {",
 					"    if (!accountName || !sasKey) {",
 					"        throw \"Missing required parameter\";",
 					"    }",
 					"",
-					"    const now = new Date();",
-					"    const minuteInMilliSeconds = 60000;",
-					"    const signedPermission = \"rwdlacup\"; //Read, Write, Delete, List, Add, Create, Update, Process",
+					"    //Persmissions: Read, Write, Delete, List, Add, Create, Update, Process",
+					"    const signedPermission = \"rwdlacup\";",
 					"    const signedServices = \"bfqt\"; // Blob, File, Queue, Table",
 					"    const signedResourceTypes = \"sco\"; // Service, Container, Object",
-					"    const signedStart = new Date(now.getTime() - minuteInMilliSeconds).toISOString().slice(0, 19) + \"Z\";",
-					"    const signedExpiry = new Date(now.getTime() + minuteInMilliSeconds).toISOString().slice(0, 19) + \"Z\";",
+					"",
+					"    //Dates need to be in yyyy-dd-MMTHH:mm:ssZ format",
+					"    const now = new Date();",
+					"    const minuteInMilliSeconds = 60000;",
+					"    const signedStart = new Date(now.getTime() - minuteInMilliSeconds)",
+					"        .toISOString()",
+					"        .slice(0, 19) + \"Z\"; //Remove milliseconds",
+					"    const signedExpiry = new Date(now.getTime() + minuteInMilliSeconds)",
+					"        .toISOString()",
+					"        .slice(0, 19) + \"Z\";",
+					"",
 					"    const signedIP = \"\";",
 					"    const signedProtocol = \"https\";",
 					"    const signedVersion = \"2017-04-17\";",
@@ -262,10 +282,10 @@
 					"    signature = signature.toString(CryptoJS.enc.Base64);",
 					"    signature = encodeURIComponent(signature);",
 					"",
+					"    // The full SAS token query string is added to the sv parameter to",
+					"    // reduce the length of the request URI in Postman ",
 					"    const uri =",
-					"        //`?` +",
-					"        //`sv=",
-					"        `${signedVersion}&` +",
+					"        /*?sv=*/`${signedVersion}&` +",
 					"        `ss=${signedServices}&` +",
 					"        `srt=${signedResourceTypes}&` +",
 					"        `sp=${signedPermission}&` +",

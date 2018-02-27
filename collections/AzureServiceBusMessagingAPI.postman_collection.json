@@ -1,13 +1,14 @@
 {
 	"info": {
 		"name": "Azure Service Bus Messaging API",
-		"_postman_id": "2eaec1d9-9a31-ce38-98c6-10d2298f505d",
+		"_postman_id": "c8ec2bef-34a5-41fb-9e5c-236e680870c7",
 		"description": "Send and receive messages using the Service Bus Messaging API [Documentation ](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Queue",
+			"description": null,
 			"item": [
 				{
 					"name": "Send Message",
@@ -188,6 +189,7 @@
 		},
 		{
 			"name": "Subscription",
+			"description": null,
 			"item": [
 				{
 					"name": "Send Message",
@@ -384,7 +386,7 @@
 					"const namespaceUri = pm.variables.get(\"namespaceUri\");",
 					"const sasKeyName = pm.variables.get(\"sasKeyName\");",
 					"const sasKey = pm.variables.get(\"sasKey\");",
-					"const sasToken = createSASToken(namespaceUri, sasKeyName, sasKey);",
+					"const sasToken = createServiceBusOrEventHubsSASToken(namespaceUri, sasKeyName, sasKey);",
 					"",
 					"pm.variables.set(\"sasToken\", sasToken);",
 					"",
@@ -398,7 +400,7 @@
 					" * {@link https://github.com/lfalck/AzureRestApiPostmanCollections GitHub}",
 					" * ",
 					" */",
-					"function createSASToken(resourceUri, sasKeyName, sasKey) {",
+					"function createServiceBusOrEventHubsSASToken(resourceUri, sasKeyName, sasKey) {",
 					"    if (!resourceUri || !sasKeyName || !sasKey) {",
 					"        throw \"Missing required parameter\";",
 					"    }",
@@ -407,8 +409,7 @@
 					"    const minute = 60;",
 					"    const ttl = Math.round(now.getTime() / 1000) + minute;",
 					"    const signature = encoded + '\\n' + ttl;",
-					"    const signatureUTF8 = signature.toString(CryptoJS.enc.Utf8);",
-					"    const hash = CryptoJS.HmacSHA256(signatureUTF8, sasKey).toString(CryptoJS.enc.Base64);",
+					"    const hash = CryptoJS.HmacSHA256(signature, sasKey).toString(CryptoJS.enc.Base64);",
 					"    return 'SharedAccessSignature sr=' + encoded + '&sig=' +",
 					"        encodeURIComponent(hash) + '&se=' + ttl + '&skn=' + sasKeyName;",
 					"}"
