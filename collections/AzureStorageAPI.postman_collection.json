@@ -20,9 +20,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&numofmessages=1",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&numofmessages=1",
+							"protocol": "https",
 							"host": [
-								"{{storageQueueAccountUri}}"
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
 							],
 							"path": [
 								"{{storageQueueName}}",
@@ -57,9 +62,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&numofmessages=1&peekonly=true",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&numofmessages=1&peekonly=true",
+							"protocol": "https",
 							"host": [
-								"{{storageQueueAccountUri}}"
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
 							],
 							"path": [
 								"{{storageQueueName}}",
@@ -104,9 +114,14 @@
 							"raw": "<QueueMessage>  \r\n    <MessageText>\r\n    \tHello World!\r\n    </MessageText>  \r\n</QueueMessage>  "
 						},
 						"url": {
-							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}",
+							"protocol": "https",
 							"host": [
-								"{{storageQueueAccountUri}}"
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
 							],
 							"path": [
 								"{{storageQueueName}}",
@@ -135,9 +150,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&popreceipt=",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&popreceipt=",
+							"protocol": "https",
 							"host": [
-								"{{storageQueueAccountUri}}"
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
 							],
 							"path": [
 								"{{storageQueueName}}",
@@ -172,9 +192,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{storageQueueAccountUri}}/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}",
+							"protocol": "https",
 							"host": [
-								"{{storageQueueAccountUri}}"
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
 							],
 							"path": [
 								"{{storageQueueName}}",
@@ -211,6 +236,108 @@
 					"listen": "test",
 					"script": {
 						"id": "6647b32f-1730-499e-978c-fc73b6851697",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Blob",
+			"description": "The REST API for the Blob service defines HTTP operations against container and blob resources. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api)",
+			"item": [
+				{
+					"name": "Get Blob",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://{{storageAccountName}}.blob.core.windows.net/{{storageContainerName}}/{{storageBlobName}}?sv={{storageSasTokenQueryString}}",
+							"protocol": "https",
+							"host": [
+								"{{storageAccountName}}",
+								"blob",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								"{{storageContainerName}}",
+								"{{storageBlobName}}"
+							],
+							"query": [
+								{
+									"key": "sv",
+									"value": "{{storageSasTokenQueryString}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "The Get Blob operation reads or downloads a blob from the system, including its metadata and properties. You can also call Get Blob to read a snapshot.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob)"
+					},
+					"response": []
+				},
+				{
+					"name": "Put Blob",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "x-ms-blob-type",
+								"value": "BlockBlob",
+								"description": "Required. Specifies the type of blob to create: BlockBlob, PageBlob, or AppendBlob. "
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{storageAccountName}}.blob.core.windows.net/{{storageContainerName}}/{{storageBlobName}}?sv={{storageSasTokenQueryString}}",
+							"protocol": "https",
+							"host": [
+								"{{storageAccountName}}",
+								"blob",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								"{{storageContainerName}}",
+								"{{storageBlobName}}"
+							],
+							"query": [
+								{
+									"key": "sv",
+									"value": "{{storageSasTokenQueryString}}",
+									"equals": true
+								}
+							]
+						},
+						"description": "The Put Blob operation creates a new block, page, or append blob, or updates the content of an existing block blob.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/put-blob)"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "08e920fa-7970-4bc1-b96a-3dfb0f2f49db",
+						"type": "text/javascript",
+						"exec": [
+							"const storageContainerName = \"\";",
+							"const storageBlobName = \"\";",
+							"",
+							"pm.variables.set(\"storageContainerName\", storageContainerName);",
+							"pm.variables.set(\"storageBlobName\", storageBlobName);"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9c0bc27-f657-4f98-ae45-e83183f42ec4",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -313,31 +440,39 @@
 	],
 	"variable": [
 		{
-			"id": "a8491625-0c67-4acb-940f-64e329011b08",
+			"id": "ceec54fb-8d8a-4050-8459-a080028f5826",
 			"key": "storageAccountName",
 			"value": "Enter here or in an environment variable",
 			"type": "text"
 		},
 		{
-			"id": "d71cbbbb-2b12-4413-bdab-1f7484ee2707",
+			"id": "2a25fad5-7155-4f9d-a69f-77520a68f671",
 			"key": "storageSasKey",
 			"value": "Enter here or in an environment variable",
 			"type": "text"
 		},
 		{
-			"id": "fd6662d3-e878-45a2-964d-8fdbb7b18b71",
-			"key": "storageQueueAccountUri",
-			"value": "https://<yournamespace>.queue.core.windows.net",
-			"type": "text"
-		},
-		{
-			"id": "ea82f208-76ee-4062-9335-fd9104594f9a",
+			"id": "dcb4e45e-1d80-4a8f-bbee-aef936d9f2f2",
 			"key": "storageQueueName",
 			"value": "Need to be set in folder pre request script",
 			"type": "text"
 		},
 		{
-			"id": "375110b1-5671-438a-a035-3a8074f277aa",
+			"id": "5186ea93-3cdd-469f-86b7-c355ab5b5e53",
+			"key": "storageContainerName",
+			"value": "Need to be set in folder pre request script",
+			"type": "text",
+			"description": ""
+		},
+		{
+			"id": "0aaedae6-ee0d-4541-98a7-ed4de53ff179",
+			"key": "storageBlobName",
+			"value": "Need to be set in folder pre request script",
+			"type": "text",
+			"description": ""
+		},
+		{
+			"id": "c5aa47e8-8ecc-4056-81d1-0ba8a3c9ceaa",
 			"key": "storageSasTokenQueryString",
 			"value": "Automatically generated in collection pre request script",
 			"type": "text"
