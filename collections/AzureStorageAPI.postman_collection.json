@@ -2,7 +2,7 @@
 	"info": {
 		"name": "Azure Storage API",
 		"_postman_id": "5b1a63a0-642d-4a8b-9e0f-df185b1cb443",
-		"description": "The REST APIs for the Microsoft Azure storage services offer programmatic access to the Blob, Queue, Table, and File services in Azure or in the development environment, via the storage emulator.\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/azure-storage-services-rest-api-reference)",
+		"description": "The REST APIs for the Microsoft Azure storage services offer programmatic access to the Blob, Queue, Table, and File services in Azure or in the development environment, via the storage emulator.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/azure-storage-services-rest-api-reference)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

@@ -2,7 +2,7 @@
 	"info": {
 		"name": "Azure Service Bus Messaging API",
 		"_postman_id": "c8ec2bef-34a5-41fb-9e5c-236e680870c7",
-		"description": "Send and receive messages using the Service Bus Messaging API [Documentation ](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)",
+		"description": "Send and receive messages using the Service Bus Messaging API.    \n[Documentation ](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [

@@ -2,7 +2,7 @@
 	"info": {
 		"name": "Azure Event Hubs API",
 		"_postman_id": "6b9ab7c4-47c3-49c2-bcfc-8ba32e1a5a6e",
-		"description": "Send events using the Event Hubs API    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/event-hubs-runtime-rest)",
+		"description": "Send events using the Event Hubs API.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/event-hubs-runtime-rest)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
