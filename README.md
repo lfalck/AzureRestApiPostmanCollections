@@ -33,7 +33,7 @@ Work with the [Blob Service API](https://docs.microsoft.com/en-us/rest/api/stora
 
 To get started, edit the collection variables **storageAccountName** and **storageSasKey**. 
 
-For queues, set the variable **storageQueueName** in the pre request script for the folder Queue. 
+For queues, set the variable **storageQueueName** in the pre request script for the folder Queue.    
 For blobs, set the variables **storageContainerName** and **storageBlobName** in the pre request script for the folder Blob. 
 
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8kE)
