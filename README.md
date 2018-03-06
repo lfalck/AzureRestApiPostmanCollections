@@ -6,6 +6,8 @@ If you need multiple environments you can create environment variables with the 
 
 Scripts and variables are found by right clicking and selecting edit on a collection or folder.
 
+API documentation by Microsoft copied from https://docs.microsoft.com is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
 ## Azure Service Bus Messaging API
 
 Send and receive messages using the [Service Bus Messaging API](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)
