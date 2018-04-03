@@ -6,6 +6,8 @@ If you need multiple environments you can create environment variables with the 
 
 Scripts and variables are found by right clicking and selecting edit on a collection or folder.
 
+API documentation by Microsoft copied from https://docs.microsoft.com is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
 ## Azure Service Bus Messaging API
 
 Send and receive messages using the [Service Bus Messaging API](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)
@@ -33,7 +35,7 @@ Work with the [Blob Service API](https://docs.microsoft.com/en-us/rest/api/stora
 
 To get started, edit the collection variables **storageAccountName** and **storageSasKey**. 
 
-For queues, set the variable **storageQueueName** in the pre request script for the folder Queue. 
+For queues, set the variable **storageQueueName** in the pre request script for the folder Queue.    
 For blobs, set the variables **storageContainerName** and **storageBlobName** in the pre request script for the folder Blob. 
 
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8kE)
