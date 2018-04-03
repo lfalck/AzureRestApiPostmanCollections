@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "a6a3d80d-a13f-45fb-90e2-3eef574f4bff",
+		"name": "Azure Event Grid API",
+		"description": "Publish to Azure Event Grid  \n[Documentation](https://docs.microsoft.com/en-us/azure/event-grid/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Send Event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "aeg-sas-key",
+						"value": "{{sasKey}}",
+						"description": "Event Grid SAS key from portal."
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\r\n  \"id\": \"{{$guid}}\",\r\n  \"eventType\": \"recordInserted\",\r\n  \"subject\": \"myapp/messages\",\r\n  \"eventTime\": \"{{currentTime}}\",\r\n  \"data\": {\r\n    \"message\": \"Hello World Event Grid!\"\r\n  },\r\n  \"dataVersion\": \"1.0\"\r\n}]"
+				},
+				"url": {
+					"raw": "{{topic-endpoint}}?api-version={{api-version}}",
+					"host": [
+						"{{topic-endpoint}}"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "{{api-version}}"
+						}
+					]
+				},
+				"description": "Post to custom topic for Azure Event Grid.\n[Documentation](https://docs.microsoft.com/en-us/azure/event-grid/post-to-custom-topic)"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "4f21bd54-03b9-463b-b317-09934dc6b741",
+				"type": "text/javascript",
+				"exec": [
+					"const currentTime = new Date().toISOString();",
+					"pm.variables.set(\"currentTime\", currentTime);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "01eb605c-7f4d-45fa-9eb0-ed3047acfdf6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "808c3311-a69c-40ce-87bf-beb88c000faf",
+			"key": "topic-endpoint",
+			"value": "https://<<your-topic>>.eventgrid.azure.net/api/events",
+			"type": "string",
+			"description": ""
+		},
+		{
+			"id": "bf8805ea-e07b-40ea-ba3a-d1fe7b7c0d51",
+			"key": "api-version",
+			"value": "2018-01-01",
+			"type": "string",
+			"description": ""
+		},
+		{
+			"id": "6d4cfdcf-d3f2-4469-918f-08f1d79a2cae",
+			"key": "eventTime",
+			"value": "Automatically generated in collection pre request script",
+			"type": "string",
+			"description": ""
+		},
+		{
+			"id": "518a6c90-8da8-4ede-b006-e73df9d8243e",
+			"key": "sasKey",
+			"value": "Enter here or in an environment variable",
+			"type": "string",
+			"description": ""
+		}
+	]
+}

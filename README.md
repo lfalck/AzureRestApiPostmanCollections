@@ -39,3 +39,15 @@ For blobs, set the variables **storageContainerName** and **storageBlobName** in
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8kE)
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b7c77fb099b35b7f1ed7)
+
+
+## Azure Event Grid API
+Send events to custom Azure Event Grid Topics
+
+To get started, edit the collection variables **sasKey** and **topic-endpoint**. 
+
+[Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVu2kpnU)
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a73794b9d55a7627b3e4)
+
+
