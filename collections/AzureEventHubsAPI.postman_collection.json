@@ -1,7 +1,7 @@
 {
 	"info": {
-		"name": "Azure Event Hubs API",
 		"_postman_id": "6b9ab7c4-47c3-49c2-bcfc-8ba32e1a5a6e",
+		"name": "Azure Event Hubs API",
 		"description": "Send events using the Event Hubs API.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/event-hubs-runtime-rest)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,6 +10,62 @@
 			"name": "Event Hub",
 			"description": null,
 			"item": [
+				{
+					"name": "Send batch events",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/vnd.microsoft.servicebus.json",
+								"description": "Set to application/vnd.microsoft.servicebus.json for batch events"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n\t{\"Body\":\"Message1\"},\r\n\t{\"Body\":\"Message2\"},\r\n\t{\"Body\":\"Message3\"}\r\n]  \r\n"
+						},
+						"url": {
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:eventHubPath/messages",
+							"protocol": "https",
+							"host": [
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
+							],
+							"path": [
+								":eventHubPath",
+								"messages"
+							],
+							"variable": [
+								{
+									"key": "eventHubPath",
+									"value": ""
+								}
+							]
+						},
+						"description": "Sends a new batched message event to an Event Hub.\r\n\r\n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/send-batch-events)"
+					},
+					"response": []
+				},
 				{
 					"name": "Send Event",
 					"event": [
@@ -42,7 +98,7 @@
 							"raw": "Hello World!"
 						},
 						"url": {
-							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/{{eventHubPath}}/messages?api-version={{api-version}}",
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:eventHubPath/messages?api-version={{api-version}}",
 							"protocol": "https",
 							"host": [
 								"{{servicebusNamespace}}",
@@ -51,14 +107,19 @@
 								"net"
 							],
 							"path": [
-								"{{eventHubPath}}",
+								":eventHubPath",
 								"messages"
 							],
 							"query": [
 								{
 									"key": "api-version",
-									"value": "{{api-version}}",
-									"equals": true
+									"value": "{{api-version}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "eventHubPath",
+									"value": ""
 								}
 							]
 						},
@@ -98,7 +159,7 @@
 							"raw": "Hello World!"
 						},
 						"url": {
-							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/{{eventHubPath}}/partitions/{{partitionId}}/messages",
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:eventHubPath/partitions/:partitionId/messages",
 							"protocol": "https",
 							"host": [
 								"{{servicebusNamespace}}",
@@ -107,63 +168,23 @@
 								"net"
 							],
 							"path": [
-								"{{eventHubPath}}",
+								":eventHubPath",
 								"partitions",
-								"{{partitionId}}",
+								":partitionId",
 								"messages"
+							],
+							"variable": [
+								{
+									"key": "eventHubPath",
+									"value": ""
+								},
+								{
+									"key": "partitionId",
+									"value": ""
+								}
 							]
 						},
 						"description": "Sends a new event to a specified partition in an Event Hub.\r\n\r\n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/send-partition-event)"
-					},
-					"response": []
-				},
-				{
-					"name": "Send batch events",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{sasToken}}",
-								"description": "SAS token generated in pre-request script in collection"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/vnd.microsoft.servicebus.json",
-								"description": "Set to application/vnd.microsoft.servicebus.json for batch events"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "[\r\n\t{\"Body\":\"Message1\"},\r\n\t{\"Body\":\"Message2\"},\r\n\t{\"Body\":\"Message3\"}\r\n]  \r\n"
-						},
-						"url": {
-							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/{{eventHubPath}}/messages",
-							"protocol": "https",
-							"host": [
-								"{{servicebusNamespace}}",
-								"servicebus",
-								"windows",
-								"net"
-							],
-							"path": [
-								"{{eventHubPath}}",
-								"messages"
-							]
-						},
-						"description": "Sends a new batched message event to an Event Hub.\r\n\r\n[Documentation](https://docs.microsoft.com/en-us/rest/api/eventhub/send-batch-events)"
 					},
 					"response": []
 				}
@@ -175,11 +196,7 @@
 						"id": "ad24c7bb-e8a1-444d-8556-c298943460aa",
 						"type": "text/javascript",
 						"exec": [
-							"const eventHubPath = \"\";",
-							"pm.variables.set(\"eventHubPath\", eventHubPath);",
-							"",
-							"const partitionId = 0;",
-							"pm.variables.set(\"partitionId\", partitionId);"
+							""
 						]
 					}
 				},
@@ -250,46 +267,34 @@
 	],
 	"variable": [
 		{
-			"id": "fdc955c0-3368-4e59-aa82-c9eb471e6726",
+			"id": "931609c4-1908-45da-87e0-91b7262abcc9",
 			"key": "servicebusNamespace",
-			"value": "Enter here or in an environment variable",
-			"type": "text"
+			"value": "Event Hubs Namespace Name",
+			"type": "string"
 		},
 		{
-			"id": "26d0985f-3c64-4fc4-b843-31bb2cab889a",
+			"id": "8d5c8d0e-de61-4a8e-b29b-f83b967877aa",
 			"key": "sasKeyName",
 			"value": "Enter here or in an environment variable",
-			"type": "text"
+			"type": "string"
 		},
 		{
-			"id": "2674a499-0013-4eeb-bdf0-d10c8649cf21",
+			"id": "95020630-4a59-4788-b473-023d577e8b28",
 			"key": "sasKey",
 			"value": "Enter here or in an environment variable",
-			"type": "text"
+			"type": "string"
 		},
 		{
-			"id": "5a5c05b2-354f-4a77-91cc-cf5632b6e940",
+			"id": "3c3355a2-40b8-415f-93b8-c6808d956f6a",
 			"key": "sasToken",
 			"value": "Automatically generated in collection pre request script",
-			"type": "text"
+			"type": "string"
 		},
 		{
-			"id": "c3002f8e-a887-42d9-ad48-8459d9715474",
-			"key": "eventHubPath",
-			"value": "Need to be set in folder pre request script",
-			"type": "text"
-		},
-		{
-			"id": "0cc810be-258a-4082-ab6c-1841f61fc970",
+			"id": "7fb039f6-7ac6-486c-a327-a3c072350863",
 			"key": "api-version",
 			"value": "2014-01",
-			"type": "text"
-		},
-		{
-			"id": "5c442923-acf6-46dc-865d-14446fb5c565",
-			"key": "partitionId",
-			"value": "Can be set in folder pre request script if partitions are used",
-			"type": "text"
+			"type": "string"
 		}
 	]
 }

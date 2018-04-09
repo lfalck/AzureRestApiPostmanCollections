@@ -1,7 +1,7 @@
 {
 	"info": {
-		"name": "Azure Service Bus Messaging API",
 		"_postman_id": "c8ec2bef-34a5-41fb-9e5c-236e680870c7",
+		"name": "Azure Service Bus Messaging API",
 		"description": "Send and receive messages using the Service Bus Messaging API.    \n[Documentation ](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,107 +10,6 @@
 			"name": "Queue",
 			"description": null,
 			"item": [
-				{
-					"name": "Send Message",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{sasToken}}",
-								"description": "SAS token generated in pre-request script in collection"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/atom+xml;type=entry;charset=utf-8"
-							},
-							{
-								"key": "BrokerProperties",
-								"value": "null",
-								"description": "JSON-encoded set of BrokeredMessage properties"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "Hello World!"
-						},
-						"url": {
-							"raw": "{{namespaceUri}}/{{queueName}}/messages",
-							"host": [
-								"{{namespaceUri}}"
-							],
-							"path": [
-								"{{queueName}}",
-								"messages"
-							]
-						},
-						"description": "Sends a message to a Service Bus queue or topic.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
-					},
-					"response": []
-				},
-				{
-					"name": "Peek-Lock Message",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "e2cffe52-d621-4747-af7e-265058a41b51",
-								"type": "text/javascript",
-								"exec": [
-									""
-								]
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "{{sasToken}}",
-								"description": "SAS token generated in pre-request script in collection"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/atom+xml;type=entry;charset=utf-8"
-							},
-							{
-								"key": "BrokerProperties",
-								"value": "null",
-								"description": "JSON-encoded set of BrokeredMessage properties"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "{{namespaceUri}}/{{queueName}}/messages/head",
-							"host": [
-								"{{namespaceUri}}"
-							],
-							"path": [
-								"{{queueName}}",
-								"messages",
-								"head"
-							]
-						},
-						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
-					},
-					"response": []
-				},
 				{
 					"name": "Receive and Delete Message",
 					"event": [
@@ -148,49 +47,30 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{namespaceUri}}/{{queueName}}/messages/head",
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:queueName/messages/head",
+							"protocol": "https",
 							"host": [
-								"{{namespaceUri}}"
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
 							],
 							"path": [
-								"{{queueName}}",
+								":queueName",
 								"messages",
 								"head"
+							],
+							"variable": [
+								{
+									"key": "queueName",
+									"value": ""
+								}
 							]
 						},
 						"description": "This operation receives a message from a queue or subscription, and removes the message from that queue or subscription in one atomic operation.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/receive-and-delete-message-destructive-read)"
 					},
 					"response": []
-				}
-			],
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "9ca824e3-6de2-4a28-9d5b-054b015f641a",
-						"type": "text/javascript",
-						"exec": [
-							"const queueName = \"\";",
-							"pm.variables.set(\"queueName\", queueName);"
-						]
-					}
 				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "8f494fd7-7eef-4dc1-8c22-3e23243eb703",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				}
-			]
-		},
-		{
-			"name": "Subscription",
-			"description": null,
-			"item": [
 				{
 					"name": "Send Message",
 					"event": [
@@ -228,13 +108,23 @@
 							"raw": "Hello World!"
 						},
 						"url": {
-							"raw": "{{namespaceUri}}/{{topicName}}/messages",
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:queueName/messages",
+							"protocol": "https",
 							"host": [
-								"{{namespaceUri}}"
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
 							],
 							"path": [
-								"{{topicName}}",
+								":queueName",
 								"messages"
+							],
+							"variable": [
+								{
+									"key": "queueName",
+									"value": ""
+								}
 							]
 						},
 						"description": "Sends a message to a Service Bus queue or topic.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
@@ -278,19 +168,182 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{namespaceUri}}/{{topicName}}/subscriptions/{{subscriptionName}}/messages/head",
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:queueName/messages/head",
+							"protocol": "https",
 							"host": [
-								"{{namespaceUri}}"
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
 							],
 							"path": [
-								"{{topicName}}",
-								"subscriptions",
-								"{{subscriptionName}}",
+								":queueName",
 								"messages",
 								"head"
+							],
+							"variable": [
+								{
+									"key": "queueName",
+									"value": ""
+								}
 							]
 						},
 						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9ca824e3-6de2-4a28-9d5b-054b015f641a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f494fd7-7eef-4dc1-8c22-3e23243eb703",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Subscription",
+			"description": null,
+			"item": [
+				{
+					"name": "Peek-Lock Message",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e2cffe52-d621-4747-af7e-265058a41b51",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							},
+							{
+								"key": "BrokerProperties",
+								"value": "null",
+								"description": "JSON-encoded set of BrokeredMessage properties"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:topicName/subscriptions/:subscriptionName/messages/head",
+							"protocol": "https",
+							"host": [
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
+							],
+							"path": [
+								":topicName",
+								"subscriptions",
+								":subscriptionName",
+								"messages",
+								"head"
+							],
+							"variable": [
+								{
+									"key": "topicName",
+									"value": ""
+								},
+								{
+									"key": "subscriptionName",
+									"value": ""
+								}
+							]
+						},
+						"description": "This operation atomically retrieves and locks a message from a queue or subscription for processing.  \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/peek-lock-message-non-destructive-read)"
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ddbe4407-0a04-4d8e-ab3a-486358c6514e",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{sasToken}}",
+								"description": "SAS token generated in pre-request script in collection"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/atom+xml;type=entry;charset=utf-8"
+							},
+							{
+								"key": "BrokerProperties",
+								"value": "null",
+								"description": "JSON-encoded set of BrokeredMessage properties"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Hello World!"
+						},
+						"url": {
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:topicName/messages",
+							"protocol": "https",
+							"host": [
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
+							],
+							"path": [
+								":topicName",
+								"messages"
+							],
+							"variable": [
+								{
+									"key": "topicName",
+									"value": ""
+								}
+							]
+						},
+						"description": "Sends a message to a Service Bus queue or topic.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/send-message-to-queue)"
 					},
 					"response": []
 				},
@@ -331,16 +384,30 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{namespaceUri}}/{{topicName}}/subscriptions/{{subscriptionName}}/messages/head",
+							"raw": "https://{{servicebusNamespace}}.servicebus.windows.net/:topicName/subscriptions/:subscriptionName/messages/head",
+							"protocol": "https",
 							"host": [
-								"{{namespaceUri}}"
+								"{{servicebusNamespace}}",
+								"servicebus",
+								"windows",
+								"net"
 							],
 							"path": [
-								"{{topicName}}",
+								":topicName",
 								"subscriptions",
-								"{{subscriptionName}}",
+								":subscriptionName",
 								"messages",
 								"head"
+							],
+							"variable": [
+								{
+									"key": "topicName",
+									"value": ""
+								},
+								{
+									"key": "subscriptionName",
+									"value": ""
+								}
 							]
 						},
 						"description": "This operation receives a message from a queue or subscription, and removes the message from that queue or subscription in one atomic operation.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/servicebus/receive-and-delete-message-destructive-read)"
@@ -355,11 +422,7 @@
 						"id": "569650a0-41da-42bf-98e1-19ba1eadef06",
 						"type": "text/javascript",
 						"exec": [
-							"const topicName = \"\";",
-							"const subscriptionName = \"\";",
-							"",
-							"pm.variables.set(\"topicName\", topicName);",
-							"pm.variables.set(\"subscriptionName\", subscriptionName);"
+							""
 						]
 					}
 				},
@@ -383,7 +446,8 @@
 				"id": "cd54c413-85bc-46e8-9a93-b3f6abe9a93a",
 				"type": "text/javascript",
 				"exec": [
-					"const namespaceUri = pm.variables.get(\"namespaceUri\");",
+					"const servicebusNamespace = pm.variables.get(\"servicebusNamespace\");",
+					"const namespaceUri = \"https://\"+servicebusNamespace+\".servicebus.windows.net\";",
 					"const sasKeyName = pm.variables.get(\"sasKeyName\");",
 					"const sasKey = pm.variables.get(\"sasKey\");",
 					"const sasToken = createServiceBusOrEventHubsSASToken(namespaceUri, sasKeyName, sasKey);",
@@ -429,46 +493,28 @@
 	],
 	"variable": [
 		{
-			"id": "5daf51eb-a5be-4def-9a81-be4ffdf35967",
-			"key": "namespaceUri",
-			"value": "https://<yournamespace>.servicebus.windows.net",
-			"type": "text"
+			"id": "32cbbc41-a52a-4e38-bd49-67aa700afae7",
+			"key": "servicebusNamespace",
+			"value": "Service Bus Namespace Name",
+			"type": "string"
 		},
 		{
-			"id": "9b9cebf3-8eea-40a4-887a-3beb60d2b98f",
+			"id": "707059d1-6d49-456b-b62b-3cf4919d30b5",
 			"key": "sasKeyName",
 			"value": "Enter here or in an environment variable",
-			"type": "text"
+			"type": "string"
 		},
 		{
-			"id": "50d9d545-b047-4e84-946b-ae20a5aefb83",
+			"id": "19828322-a1aa-46f0-8415-9c52333a0169",
 			"key": "sasKey",
 			"value": "Enter here or in an environment variable",
-			"type": "text"
+			"type": "string"
 		},
 		{
-			"id": "75eed579-cd82-4283-a4c4-608ed9cff7df",
+			"id": "532de029-a675-4efb-9980-521d4f85b4c1",
 			"key": "sasToken",
 			"value": "Automatically generated in collection pre request script",
-			"type": "text"
-		},
-		{
-			"id": "629a19c2-eb30-42e9-a9e1-932c6b3b8335",
-			"key": "queueName",
-			"value": "Need to be set in folder pre request script",
-			"type": "text"
-		},
-		{
-			"id": "f9336f05-6161-4f64-ac4f-3fd50f2cca25",
-			"key": "topicName",
-			"value": "Need to be set in folder pre request script",
-			"type": "text"
-		},
-		{
-			"id": "e48dc5e5-65f3-4234-8fed-bf78e130fc35",
-			"key": "subscriptionName",
-			"value": "Need to be set in folder pre request script",
-			"type": "text"
+			"type": "string"
 		}
 	]
 }
