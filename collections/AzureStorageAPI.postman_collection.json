@@ -1,7 +1,7 @@
 {
 	"info": {
-		"name": "Azure Storage API",
 		"_postman_id": "5b1a63a0-642d-4a8b-9e0f-df185b1cb443",
+		"name": "Azure Storage API",
 		"description": "The REST APIs for the Microsoft Azure storage services offer programmatic access to the Blob, Queue, Table, and File services in Azure or in the development environment, via the storage emulator.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/azure-storage-services-rest-api-reference)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,16 +11,13 @@
 			"description": "Microsoft Azure Storage provides REST operations for working with messages in message queues.\n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/operations-on-messages)",
 			"item": [
 				{
-					"name": "Get Messages",
+					"name": "Delete Message",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
-							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&numofmessages=1",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages{{storageSasTokenQueryString}}&popreceipt=",
 							"protocol": "https",
 							"host": [
 								"{{storageAccountName}}",
@@ -31,24 +28,10 @@
 							],
 							"path": [
 								"{{storageQueueName}}",
-								"messages"
-							],
-							"query": [
-								{
-									"key": "sv",
-									"value": "{{storageSasTokenQueryString}}",
-									"equals": true,
-									"description": "SAS token query string generated in pre-request script in collection"
-								},
-								{
-									"key": "numofmessages",
-									"value": "1",
-									"equals": true,
-									"description": "Optional. A nonzero integer value that specifies the number of messages to retrieve from the queue, up to a maximum of 32"
-								}
+								"messages{{storageSasTokenQueryString}}&popreceipt="
 							]
 						},
-						"description": "The Get Messages operation retrieves one or more messages from the front of the queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/get-messages)"
+						"description": "The Delete Message operation deletes the specified message. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/delete-message2)"
 					},
 					"response": []
 				},
@@ -57,12 +40,9 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
+						"body": {},
 						"url": {
-							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&numofmessages=1&peekonly=true",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages{{storageSasTokenQueryString}}&numofmessages=1&peekonly=true",
 							"protocol": "https",
 							"host": [
 								"{{storageAccountName}}",
@@ -73,29 +53,60 @@
 							],
 							"path": [
 								"{{storageQueueName}}",
-								"messages"
-							],
-							"query": [
-								{
-									"key": "sv",
-									"value": "{{storageSasTokenQueryString}}",
-									"equals": true,
-									"description": "SAS token query string generated in pre-request script in collection"
-								},
-								{
-									"key": "numofmessages",
-									"value": "1",
-									"equals": true,
-									"description": "Optional. A nonzero integer value that specifies the number of messages to retrieve from the queue, up to a maximum of 32"
-								},
-								{
-									"key": "peekonly",
-									"value": "true",
-									"equals": true
-								}
+								"messages{{storageSasTokenQueryString}}&numofmessages=1&peekonly=true"
 							]
 						},
 						"description": "This operation retrieves one or more messages from the front of the queue, but does not alter the visibility of the message. \r\n\r\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/peek-messages)"
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Messages",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages{{storageSasTokenQueryString}}",
+							"protocol": "https",
+							"host": [
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								"{{storageQueueName}}",
+								"messages{{storageSasTokenQueryString}}"
+							]
+						},
+						"description": "The Clear Messages operation deletes all messages from the specified queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/clear-messages)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages{{storageSasTokenQueryString}}&numofmessages=1",
+							"protocol": "https",
+							"host": [
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								"{{storageQueueName}}",
+								"messages{{storageSasTokenQueryString}}&numofmessages=1"
+							]
+						},
+						"description": "The Get Messages operation retrieves one or more messages from the front of the queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/get-messages)"
 					},
 					"response": []
 				},
@@ -111,10 +122,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "<QueueMessage>  \r\n    <MessageText>\r\n    \tHello World!\r\n    </MessageText>  \r\n</QueueMessage>  "
+							"raw": "<QueueMessage>  \r\n    <MessageText>\r\n      Hello World!\r\n    </MessageText>  \r\n</QueueMessage>  "
 						},
 						"url": {
-							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages{{storageSasTokenQueryString}}",
 							"protocol": "https",
 							"host": [
 								"{{storageAccountName}}",
@@ -125,96 +136,10 @@
 							],
 							"path": [
 								"{{storageQueueName}}",
-								"messages"
-							],
-							"query": [
-								{
-									"key": "sv",
-									"value": "{{storageSasTokenQueryString}}",
-									"equals": true,
-									"description": "SAS token query string generated in pre-request script in collection"
-								}
+								"messages{{storageSasTokenQueryString}}"
 							]
 						},
 						"description": "The Put Message operation adds a new message to the back of the message queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/put-message)"
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Message",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}&popreceipt=",
-							"protocol": "https",
-							"host": [
-								"{{storageAccountName}}",
-								"queue",
-								"core",
-								"windows",
-								"net"
-							],
-							"path": [
-								"{{storageQueueName}}",
-								"messages"
-							],
-							"query": [
-								{
-									"key": "sv",
-									"value": "{{storageSasTokenQueryString}}",
-									"equals": true,
-									"description": "SAS token query string generated in pre-request script in collection"
-								},
-								{
-									"key": "popreceipt",
-									"value": "",
-									"equals": true,
-									"description": "Required. A valid pop receipt value returned from an earlier call to the Get Messages or Update Message operation."
-								}
-							]
-						},
-						"description": "The Delete Message operation deletes the specified message. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/delete-message2)"
-					},
-					"response": []
-				},
-				{
-					"name": "Clear Messages",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://{{storageAccountName}}.queue.core.windows.net/{{storageQueueName}}/messages?sv={{storageSasTokenQueryString}}",
-							"protocol": "https",
-							"host": [
-								"{{storageAccountName}}",
-								"queue",
-								"core",
-								"windows",
-								"net"
-							],
-							"path": [
-								"{{storageQueueName}}",
-								"messages"
-							],
-							"query": [
-								{
-									"key": "sv",
-									"value": "{{storageSasTokenQueryString}}",
-									"equals": true,
-									"description": "SAS token query string generated in pre-request script in collection"
-								}
-							]
-						},
-						"description": "The Clear Messages operation deletes all messages from the specified queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/clear-messages)"
 					},
 					"response": []
 				}
@@ -255,7 +180,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "https://{{storageAccountName}}.blob.core.windows.net/{{storageContainerName}}/{{storageBlobName}}?sv={{storageSasTokenQueryString}}",
+							"raw": "https://{{storageAccountName}}.blob.core.windows.net/{{storageContainerName}}/{{storageBlobName}}{{storageSasTokenQueryString}}",
 							"protocol": "https",
 							"host": [
 								"{{storageAccountName}}",
@@ -266,14 +191,7 @@
 							],
 							"path": [
 								"{{storageContainerName}}",
-								"{{storageBlobName}}"
-							],
-							"query": [
-								{
-									"key": "sv",
-									"value": "{{storageSasTokenQueryString}}",
-									"equals": true
-								}
+								"{{storageBlobName}}{{storageSasTokenQueryString}}"
 							]
 						},
 						"description": "The Get Blob operation reads or downloads a blob from the system, including its metadata and properties. You can also call Get Blob to read a snapshot.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/get-blob)"
@@ -293,7 +211,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "https://{{storageAccountName}}.blob.core.windows.net/{{storageContainerName}}/{{storageBlobName}}?sv={{storageSasTokenQueryString}}",
+							"raw": "https://{{storageAccountName}}.blob.core.windows.net/{{storageContainerName}}/{{storageBlobName}}{{storageSasTokenQueryString}}",
 							"protocol": "https",
 							"host": [
 								"{{storageAccountName}}",
@@ -304,14 +222,7 @@
 							],
 							"path": [
 								"{{storageContainerName}}",
-								"{{storageBlobName}}"
-							],
-							"query": [
-								{
-									"key": "sv",
-									"value": "{{storageSasTokenQueryString}}",
-									"equals": true
-								}
+								"{{storageBlobName}}{{storageSasTokenQueryString}}"
 							]
 						},
 						"description": "The Put Blob operation creates a new block, page, or append blob, or updates the content of an existing block blob.    \n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/put-blob)"
@@ -354,75 +265,6 @@
 				"id": "cd54c413-85bc-46e8-9a93-b3f6abe9a93a",
 				"type": "text/javascript",
 				"exec": [
-					"const storageSasKey = pm.variables.get(\"storageSasKey\");",
-					"const storageAccountName = pm.variables.get(\"storageAccountName\");",
-					"const storageSasTokenQueryString = createStorageSASTokenQueryString(storageAccountName, storageSasKey);",
-					"",
-					"pm.variables.set(\"storageSasTokenQueryString\", storageSasTokenQueryString);",
-					"",
-					"",
-					"/**",
-					" * Create a Shared Access Signature (SAS) token query string valid for one minute for use with the Azure Storage REST API",
-					" * @param accountName - The storage account name",
-					" * @param sasKey - The Shared Access Signature key",
-					" * @returns- A Shared Access Signature token query string",
-					" * {@link https://github.com/lfalck/AzureRestApiPostmanCollections GitHub}",
-					" * ",
-					" */",
-					"function createStorageSASTokenQueryString(accountName, sasKey) {",
-					"    if (!accountName || !sasKey) {",
-					"        throw \"Missing required parameter\";",
-					"    }",
-					"",
-					"    //Persmissions: Read, Write, Delete, List, Add, Create, Update, Process",
-					"    const signedPermission = \"rwdlacup\";",
-					"    const signedServices = \"bfqt\"; // Blob, File, Queue, Table",
-					"    const signedResourceTypes = \"sco\"; // Service, Container, Object",
-					"",
-					"    //Dates need to be in yyyy-dd-MMTHH:mm:ssZ format",
-					"    const now = new Date();",
-					"    const minuteInMilliSeconds = 60000;",
-					"    const signedStart = new Date(now.getTime() - minuteInMilliSeconds)",
-					"        .toISOString()",
-					"        .slice(0, 19) + \"Z\"; //Remove milliseconds",
-					"    const signedExpiry = new Date(now.getTime() + minuteInMilliSeconds)",
-					"        .toISOString()",
-					"        .slice(0, 19) + \"Z\";",
-					"",
-					"    const signedIP = \"\";",
-					"    const signedProtocol = \"https\";",
-					"    const signedVersion = \"2017-04-17\";",
-					"",
-					"    const inputvalue =",
-					"        `${accountName}\\n` +",
-					"        `${signedPermission}\\n` +",
-					"        `${signedServices}\\n` +",
-					"        `${signedResourceTypes}\\n` +",
-					"        `${signedStart}\\n` +",
-					"        `${signedExpiry}\\n` +",
-					"        `${signedIP}\\n` +",
-					"        `${signedProtocol}\\n` +",
-					"        `${signedVersion}\\n`;",
-					"",
-					"    const key = CryptoJS.enc.Base64.parse(sasKey);",
-					"    let signature = CryptoJS.HmacSHA256(inputvalue, key);",
-					"    signature = signature.toString(CryptoJS.enc.Base64);",
-					"    signature = encodeURIComponent(signature);",
-					"",
-					"    // The full SAS token query string is added to the sv parameter to",
-					"    // reduce the length of the request URI in Postman ",
-					"    const uri =",
-					"        /*?sv=*/`${signedVersion}&` +",
-					"        `ss=${signedServices}&` +",
-					"        `srt=${signedResourceTypes}&` +",
-					"        `sp=${signedPermission}&` +",
-					"        `se=${signedExpiry}&` +",
-					"        `st=${signedStart}&` +",
-					"        `spr=${signedProtocol}&` +",
-					"        `sig=${signature}`;",
-					"",
-					"    return uri;",
-					"}",
 					""
 				]
 			}
@@ -440,42 +282,36 @@
 	],
 	"variable": [
 		{
-			"id": "ceec54fb-8d8a-4050-8459-a080028f5826",
+			"id": "c44f4282-5a82-4f32-bb48-f8a138323980",
 			"key": "storageAccountName",
 			"value": "Enter here or in an environment variable",
-			"type": "text"
+			"type": "string"
 		},
 		{
-			"id": "2a25fad5-7155-4f9d-a69f-77520a68f671",
-			"key": "storageSasKey",
-			"value": "Enter here or in an environment variable",
-			"type": "text"
-		},
-		{
-			"id": "dcb4e45e-1d80-4a8f-bbee-aef936d9f2f2",
+			"id": "fb5c3dc3-9ae8-40a5-b8c6-879376a0b1f0",
 			"key": "storageQueueName",
 			"value": "Need to be set in folder pre request script",
-			"type": "text"
+			"type": "string"
 		},
 		{
-			"id": "5186ea93-3cdd-469f-86b7-c355ab5b5e53",
+			"id": "30241ce5-873d-4778-a925-a7699380436d",
 			"key": "storageContainerName",
 			"value": "Need to be set in folder pre request script",
-			"type": "text",
+			"type": "string",
 			"description": ""
 		},
 		{
-			"id": "0aaedae6-ee0d-4541-98a7-ed4de53ff179",
+			"id": "a87076c6-c402-4426-a83d-8d576a452297",
 			"key": "storageBlobName",
 			"value": "Need to be set in folder pre request script",
-			"type": "text",
+			"type": "string",
 			"description": ""
 		},
 		{
-			"id": "c5aa47e8-8ecc-4056-81d1-0ba8a3c9ceaa",
+			"id": "41babeaf-b48f-4e89-ba97-59575e6b8346",
 			"key": "storageSasTokenQueryString",
-			"value": "Automatically generated in collection pre request script",
-			"type": "text"
+			"value": "Storage accounts > Shared access signature ",
+			"type": "string"
 		}
 	]
 }
