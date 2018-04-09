@@ -1,10 +1,10 @@
 [![license](https://img.shields.io/github/license/lfalck/AzureRestApiPostmanCollections.svg)]()
 # Azure REST API Postman Collections
-Postman collections to simplify interaction with the Azure REST APIs.
+Postman collections to simplify interaction with the Azure REST APIs, focusing on those relevant for systems integration developers.
 
-If you need multiple environments you can create environment variables with the same names as the collection variables and they will be overridden. If you need multiple e.g. queues, you can copy a folder and change the variables in the pre request script.
+If you need multiple environments you can create environment variables with the same names as the collection variables and they will be overridden. If you need multiple e.g. queues, you can copy a request and change the path variables.
 
-Scripts and variables are found by right clicking and selecting edit on a collection or folder.
+Collection variables are found by right clicking and selecting edit on a collection. Path variables are found by clicking "Params" when a request is open.
 
 API documentation by Microsoft copied from https://docs.microsoft.com is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
@@ -12,7 +12,14 @@ API documentation by Microsoft copied from https://docs.microsoft.com is license
 
 Send and receive messages using the [Service Bus Messaging API](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)
 
-To get started, edit the collection variables **namespaceUri**, **sasKeyName** and **sasKey**. Also set the variables **queueName**, **topicName** and **subscriptionName** in the pre request script for the folders Queue and Subscription. 
+| Variable                   | Type                     | Description                                                            |
+| -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| servicebusNamespace        | Collection variable      | The service bus namespace name                                         |
+| sasKeyName                 | Collection variable      | Policy name from Service Bus Namespace > Shared access policies        |
+| sasKey                     | Collection variable      | Key from Service Bus Namespace > Shared access policies                |
+| queueName                  | Path variable            | Queue name from Service Bus Namespace > Queues                         |
+| topicName                  | Path variable            | Topic name from Service Bus Namespace > Topics                         |
+| subscriptionName           | Path variable            | Subscription name from Service Bus Namespace > Topics > Subscriptions  |
 
 [Full documentation here]( https://documenter.getpostman.com/view/856851/collection/RVg3f8kD)
 
@@ -22,7 +29,13 @@ To get started, edit the collection variables **namespaceUri**, **sasKeyName** a
 
 Send events using the [Event Hubs API](https://docs.microsoft.com/en-us/rest/api/eventhub/event-hubs-runtime-rest)
 
-To get started, edit the collection variables **servicebusNamespace**, **sasKeyName** and **sasKey**. Also set the variables **eventHubPath** and **partitionId** (optional) in the pre request script for the folder Event Hub. 
+| Variable                   | Type                     | Description                                                            |
+| -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| servicebusNamespace        | Collection variable      | The event hubs namespace name                                          |
+| sasKeyName                 | Collection variable      | Policy name from Event Hubs Namespace > Shared access policies         |
+| sasKey                     | Collection variable      | Key from Event Hubs Namespace > Shared access policies                 |
+| eventHubPath               | Path variable            | Event hub name from Event Hubs Namespace > Event Hubs                  |
+| partitionId                | Path variable            | Optional partition id                                                  |
 
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8k7)
 
@@ -33,10 +46,13 @@ To get started, edit the collection variables **servicebusNamespace**, **sasKeyN
 Send and receive messages using the [Queue Service API](https://docs.microsoft.com/en-us/rest/api/storageservices/operations-on-messages)    
 Work with the [Blob Service API](https://docs.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api)
 
-To get started, edit the collection variables **storageAccountName** and **storageSasKey**. 
-
-For queues, set the variable **storageQueueName** in the pre request script for the folder Queue.    
-For blobs, set the variables **storageContainerName** and **storageBlobName** in the pre request script for the folder Blob. 
+| Variable                   | Type                     | Description                                                            |
+| -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| storageAccountName         | Collection variable      | The event hubs namespace name                                          |
+| storageSasTokenQueryString | Collection variable      | Generated query string from Storage accounts > Shared access signature |
+| storageQueueName           | Path variable            | Queue name from Storage accounts > Queues                              |
+| storageContainerName       | Path variable            | Container name from Storage accounts > Containers                      |
+| storageBlobName            | Path variable            | Blob name from Storage accounts > Containers                           |
 
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8kE)
 
@@ -46,7 +62,10 @@ For blobs, set the variables **storageContainerName** and **storageBlobName** in
 ## Azure Event Grid API
 Send events to custom Azure Event Grid Topics
 
-To get started, edit the collection variables **sasKey** and **topic-endpoint**. 
+| Variable                   | Type                     | Description                                                            |
+| -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| sasKey                     | Collection variable      | Key from Event Grid Topics > Access keys                               |
+| topic-endpoint             | Collection variable      | Topic endpoint from Event Grid Topics > Overview > Topic Endpoint      |
 
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVu2kpnU)
 
