@@ -12,14 +12,14 @@ API documentation by Microsoft copied from https://docs.microsoft.com is license
 
 Send and receive messages using the [Service Bus Messaging API](https://docs.microsoft.com/en-us/rest/api/servicebus/service-bus-runtime-rest)
 
-| Variable                   | Type                     | Description                                                            |
-| -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
-| servicebusNamespace        | Collection variable      | The service bus namespace name                                         |
-| sasKeyName                 | Collection variable      | Policy name from Service Bus Namespace > Shared access policies        |
-| sasKey                     | Collection variable      | Key from Service Bus Namespace > Shared access policies                |
-| queueName                  | Path variable            | Queue name from Service Bus Namespace > Queues                         |
-| topicName                  | Path variable            | Topic name from Service Bus Namespace > Topics                         |
-| subscriptionName           | Path variable            | Subscription name from Service Bus Namespace > Topics > Subscriptions  |
+| Variable                   | Type                     | Description                                                                       |
+| -------------------------- | ------------------------ | --------------------------------------------------------------------------------- |
+| servicebusNamespace        | Collection variable      | The service bus namespace name                                                    |
+| sasKeyName                 | Collection variable      | Policy name from Service Bus Namespace > Shared access policies                   |
+| sasKey                     | Collection variable      | Key from Service Bus Namespace > Shared access policies                           |
+| queueName                  | Path variable            | Queue name from Service Bus Namespace > Queues                                    |
+| topicName                  | Path variable            | Topic name from Service Bus Namespace > Topics                                    |
+| subscriptionName           | Path variable            | Subscription name from Service Bus Namespace > Topics > Subscriptions             |
 
 [Full documentation here]( https://documenter.getpostman.com/view/856851/collection/RVg3f8kD)
 
@@ -29,13 +29,13 @@ Send and receive messages using the [Service Bus Messaging API](https://docs.mic
 
 Send events using the [Event Hubs API](https://docs.microsoft.com/en-us/rest/api/eventhub/event-hubs-runtime-rest)
 
-| Variable                   | Type                     | Description                                                            |
-| -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
-| servicebusNamespace        | Collection variable      | The event hubs namespace name                                          |
-| sasKeyName                 | Collection variable      | Policy name from Event Hubs Namespace > Shared access policies         |
-| sasKey                     | Collection variable      | Key from Event Hubs Namespace > Shared access policies                 |
-| eventHubPath               | Path variable            | Event hub name from Event Hubs Namespace > Event Hubs                  |
-| partitionId                | Path variable            | Optional partition id                                                  |
+| Variable                   | Type                     | Description                                                                       |
+| -------------------------- | ------------------------ | --------------------------------------------------------------------------------- |
+| servicebusNamespace        | Collection variable      | The event hubs namespace name                                                     |
+| sasKeyName                 | Collection variable      | Policy name from Event Hubs Namespace > Shared access policies                    |
+| sasKey                     | Collection variable      | Key from Event Hubs Namespace > Shared access policies                            |
+| eventHubPath               | Path variable            | Event hub name from Event Hubs Namespace > Event Hubs                             |
+| partitionId                | Path variable            | Optional partition id                                                             |
 
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8k7)
 
@@ -43,16 +43,16 @@ Send events using the [Event Hubs API](https://docs.microsoft.com/en-us/rest/api
 
 ## Azure Storage API
 
-Send and receive messages using the [Queue Service API](https://docs.microsoft.com/en-us/rest/api/storageservices/operations-on-messages)    
+Send and receive messages using the [Queue Service API](https://docs.microsoft.com/en-us/rest/api/storageservices/operations-on-messages)  
 Work with the [Blob Service API](https://docs.microsoft.com/en-us/rest/api/storageservices/blob-service-rest-api)
 
-| Variable                   | Type                     | Description                                                            |
-| -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
-| storageAccountName         | Collection variable      | The event hubs namespace name                                          |
-| storageSasTokenQueryString | Collection variable      | Generated query string from Storage accounts > Shared access signature |
-| storageQueueName           | Path variable            | Queue name from Storage accounts > Queues                              |
-| storageContainerName       | Path variable            | Container name from Storage accounts > Containers                      |
-| storageBlobName            | Path variable            | Blob name from Storage accounts > Containers                           |
+| Variable                   | Type                     | Description                                                                       |
+| -------------------------- | ------------------------ | --------------------------------------------------------------------------------- |
+| storageAccountName         | Collection variable      | The event hubs namespace name                                                     |
+| storageSasTokenQueryString | Collection variable      | Query string from Storage accounts > Shared access signature with "?sv=" removed. |
+| storageQueueName           | Path variable            | Queue name from Storage accounts > Queues                                         |
+| storageContainerName       | Path variable            | Container name from Storage accounts > Containers                                 |
+| storageBlobName            | Path variable            | Blob name from Storage accounts > Containers                                      |
 
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8kE)
 
@@ -62,10 +62,10 @@ Work with the [Blob Service API](https://docs.microsoft.com/en-us/rest/api/stora
 ## Azure Event Grid API
 Send events to custom Azure Event Grid Topics
 
-| Variable                   | Type                     | Description                                                            |
-| -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
-| sasKey                     | Collection variable      | Key from Event Grid Topics > Access keys                               |
-| topic-endpoint             | Collection variable      | Topic endpoint from Event Grid Topics > Overview > Topic Endpoint      |
+| Variable                   | Type                     | Description                                                                       |
+| -------------------------- | ------------------------ | --------------------------------------------------------------------------------- |
+| sasKey                     | Collection variable      | Key from Event Grid Topics > Access keys                                          |
+| topic-endpoint             | Collection variable      | Topic endpoint from Event Grid Topics > Overview > Topic Endpoint                 |
 
 [Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVu2kpnU)
 
