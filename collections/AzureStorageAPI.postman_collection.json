@@ -11,13 +11,13 @@
 			"description": "Microsoft Azure Storage provides REST operations for working with messages in message queues.\n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/operations-on-messages)",
 			"item": [
 				{
-					"name": "Delete Message",
+					"name": "Get Messages",
 					"request": {
-						"method": "DELETE",
+						"method": "GET",
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "https://{{storageAccountName}}.queue.core.windows.net/:storageQueueName/messages{{storageSasTokenQueryString}}&popreceipt=",
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/:storageQueueName/messages{{storageSasTokenQueryString}}&numofmessages=1",
 							"protocol": "https",
 							"host": [
 								"{{storageAccountName}}",
@@ -28,7 +28,7 @@
 							],
 							"path": [
 								":storageQueueName",
-								"messages{{storageSasTokenQueryString}}&popreceipt="
+								"messages{{storageSasTokenQueryString}}&numofmessages=1"
 							],
 							"variable": [
 								{
@@ -37,7 +37,7 @@
 								}
 							]
 						},
-						"description": "The Delete Message operation deletes the specified message. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/delete-message2)"
+						"description": "The Get Messages operation retrieves one or more messages from the front of the queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/get-messages)"
 					},
 					"response": []
 				},
@@ -69,68 +69,6 @@
 							]
 						},
 						"description": "This operation retrieves one or more messages from the front of the queue, but does not alter the visibility of the message. \r\n\r\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/peek-messages)"
-					},
-					"response": []
-				},
-				{
-					"name": "Clear Messages",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "https://{{storageAccountName}}.queue.core.windows.net/:storageQueueName/messages{{storageSasTokenQueryString}}",
-							"protocol": "https",
-							"host": [
-								"{{storageAccountName}}",
-								"queue",
-								"core",
-								"windows",
-								"net"
-							],
-							"path": [
-								":storageQueueName",
-								"messages{{storageSasTokenQueryString}}"
-							],
-							"variable": [
-								{
-									"key": "storageQueueName",
-									"value": ""
-								}
-							]
-						},
-						"description": "The Clear Messages operation deletes all messages from the specified queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/clear-messages)"
-					},
-					"response": []
-				},
-				{
-					"name": "Get Messages",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "https://{{storageAccountName}}.queue.core.windows.net/:storageQueueName/messages{{storageSasTokenQueryString}}&numofmessages=1",
-							"protocol": "https",
-							"host": [
-								"{{storageAccountName}}",
-								"queue",
-								"core",
-								"windows",
-								"net"
-							],
-							"path": [
-								":storageQueueName",
-								"messages{{storageSasTokenQueryString}}&numofmessages=1"
-							],
-							"variable": [
-								{
-									"key": "storageQueueName",
-									"value": ""
-								}
-							]
-						},
-						"description": "The Get Messages operation retrieves one or more messages from the front of the queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/get-messages)"
 					},
 					"response": []
 				},
@@ -172,6 +110,68 @@
 						"description": "The Put Message operation adds a new message to the back of the message queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/put-message)"
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Message",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/:storageQueueName/messages{{storageSasTokenQueryString}}&popreceipt=",
+							"protocol": "https",
+							"host": [
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								":storageQueueName",
+								"messages{{storageSasTokenQueryString}}&popreceipt="
+							],
+							"variable": [
+								{
+									"key": "storageQueueName",
+									"value": ""
+								}
+							]
+						},
+						"description": "The Delete Message operation deletes the specified message. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/delete-message2)"
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Messages",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "https://{{storageAccountName}}.queue.core.windows.net/:storageQueueName/messages{{storageSasTokenQueryString}}",
+							"protocol": "https",
+							"host": [
+								"{{storageAccountName}}",
+								"queue",
+								"core",
+								"windows",
+								"net"
+							],
+							"path": [
+								":storageQueueName",
+								"messages{{storageSasTokenQueryString}}"
+							],
+							"variable": [
+								{
+									"key": "storageQueueName",
+									"value": ""
+								}
+							]
+						},
+						"description": "The Clear Messages operation deletes all messages from the specified queue. \n\n[Documentation](https://docs.microsoft.com/en-us/rest/api/storageservices/clear-messages)"
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -208,7 +208,7 @@
 						"header": [],
 						"body": {},
 						"url": {
-							"raw": "https://{{storageAccountName}}.blob.core.windows.net/:storageContainerName/:storageBlobName{{storageSasTokenQueryString}}",
+							"raw": "https://{{storageAccountName}}.blob.core.windows.net/:storageContainerName/:storageBlobName?sv={{storageSasTokenQueryString}}",
 							"protocol": "https",
 							"host": [
 								"{{storageAccountName}}",
@@ -219,7 +219,14 @@
 							],
 							"path": [
 								":storageContainerName",
-								":storageBlobName{{storageSasTokenQueryString}}"
+								":storageBlobName"
+							],
+							"query": [
+								{
+									"key": "sv",
+									"value": "{{storageSasTokenQueryString}}",
+									"description": "SAS token query string from Storage accounts > Shared access signature. Remove the part \"?sv=\" since this is part of the URI."
+								}
 							],
 							"variable": [
 								{
@@ -249,7 +256,7 @@
 						],
 						"body": {},
 						"url": {
-							"raw": "https://{{storageAccountName}}.blob.core.windows.net/:storageContainerName/:storageBlobName{{storageSasTokenQueryString}}",
+							"raw": "https://{{storageAccountName}}.blob.core.windows.net/:storageContainerName/:storageBlobName?sv={{storageSasTokenQueryString}}",
 							"protocol": "https",
 							"host": [
 								"{{storageAccountName}}",
@@ -260,7 +267,14 @@
 							],
 							"path": [
 								":storageContainerName",
-								":storageBlobName{{storageSasTokenQueryString}}"
+								":storageBlobName"
+							],
+							"query": [
+								{
+									"key": "sv",
+									"value": "{{storageSasTokenQueryString}}",
+									"description": "SAS token query string from Storage accounts > Shared access signature. Remove the part \"?sv=\" since this is part of the URI."
+								}
 							],
 							"variable": [
 								{
@@ -326,15 +340,15 @@
 	],
 	"variable": [
 		{
-			"id": "4ae982ec-57f9-4bb7-a065-3890846a8a26",
+			"id": "779e77c8-9fdb-448e-b924-71c52084be3e",
 			"key": "storageAccountName",
 			"value": "Enter here or in an environment variable",
 			"type": "string"
 		},
 		{
-			"id": "5d9f31ee-ca7e-417b-9fb2-2b78e8bbb8d3",
+			"id": "d8c09733-958b-4167-b841-5b6194436ed5",
 			"key": "storageSasTokenQueryString",
-			"value": "Storage accounts > Shared access signature ",
+			"value": "Storage accounts > Shared access signature. Remove the part \"?sv=\" since this is part of the URI.",
 			"type": "string"
 		}
 	]
