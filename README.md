@@ -21,9 +21,6 @@ Send and receive messages using the [Service Bus Messaging API](https://docs.mic
 | topicName                  | Path variable            | Topic name from Service Bus Namespace > Topics                                    |
 | subscriptionName           | Path variable            | Subscription name from Service Bus Namespace > Topics > Subscriptions             |
 
-[Full documentation here]( https://documenter.getpostman.com/view/856851/collection/RVg3f8kD)
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/e76494a7358d49a18a65)
 
 ## Azure Event Hubs API
 
@@ -36,10 +33,6 @@ Send events using the [Event Hubs API](https://docs.microsoft.com/en-us/rest/api
 | sasKey                     | Collection variable      | Key from Event Hubs Namespace > Shared access policies                            |
 | eventHubPath               | Path variable            | Event hub name from Event Hubs Namespace > Event Hubs                             |
 | partitionId                | Path variable            | Optional partition id                                                             |
-
-[Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8k7)
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/ee13865ad00b3c55aebc)
 
 ## Azure Storage API
 
@@ -54,10 +47,6 @@ Work with the [Blob Service API](https://docs.microsoft.com/en-us/rest/api/stora
 | storageContainerName       | Path variable            | Container name from Storage accounts > Containers                                 |
 | storageBlobName            | Path variable            | Blob name from Storage accounts > Containers                                      |
 
-[Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVg3f8kE)
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/b7c77fb099b35b7f1ed7)
-
 
 ## Azure Event Grid API
 Send events to custom Azure Event Grid Topics
@@ -66,9 +55,3 @@ Send events to custom Azure Event Grid Topics
 | -------------------------- | ------------------------ | --------------------------------------------------------------------------------- |
 | sasKey                     | Collection variable      | Key from Event Grid Topics > Access keys                                          |
 | topic-endpoint             | Collection variable      | Topic endpoint from Event Grid Topics > Overview > Topic Endpoint                 |
-
-[Full documentation here](https://documenter.getpostman.com/view/856851/collection/RVu2kpnU)
-
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/a73794b9d55a7627b3e4)
-
-
